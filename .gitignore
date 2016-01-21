@@ -1,0 +1,7 @@
+.settings
+target
+*.classpath
+.tmp
+/agilelink/agilelink-view/src/bower_components
+/agilelink/agilelink-view/src/node_modules
+*.project
