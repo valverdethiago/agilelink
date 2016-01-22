@@ -15,8 +15,16 @@
             offset : 0
         };
         
-        (function init() {
-            projectController.searchResult = projectService.list(projectController.pageRequest);
+        (function init() {            
+            projectService.find(projectController.pageRequest)
+            	.success(function(searchResult) {
+            		console.log(searchResult);
+            		projectController.searchResult = searchResult;
+            	})
+            	.error(function (error) {
+            		console.log(error);
+            	})
+            
         })();
         
     }
