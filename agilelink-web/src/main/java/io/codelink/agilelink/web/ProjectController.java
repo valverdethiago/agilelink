@@ -6,6 +6,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +33,9 @@ public class ProjectController {
 		return service.saveProject(project);
 	}
 
-	@RequestMapping(value = "/find", method = POST)
-	public Page<Project> find(CustomPageRequest pageable) {
+	@RequestMapping(value = "/find", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Page<Project> find(@RequestBody CustomPageRequest pageable) {
 		Page<Project> page = service.listProjects(pageable);
 		return page;
 	}
