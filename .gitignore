@@ -5,3 +5,7 @@ target
 /agilelink/agilelink-view/src/bower_components
 /agilelink/agilelink-view/src/node_modules
 *.project
+/agilelink-model/
+/agilelink-service/
+/agilelink-view/
+/agilelink-web/
