@@ -1,12 +1,17 @@
 <div class="dashboard-container overlay-10 padded-content-page" layout="column">    
     <div layout="row" layout-md="column" layout-xs="column" layout-margin>
-        <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>
-            Exibindo projetos de {{projectController.searchResult.number + 1}} até {{(projectController.searchResult.number+1) * projectController.searchResult.size}} de {{projectController.searchResult.totalElements}}
+        <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" >
+            {{projectController.searchResult.number + 1}} - {{(projectController.searchResult.number+1) * projectController.searchResult.size}} / {{projectController.searchResult.totalElements}}
         </p>
     </div>
     <div layout="row" layout-md="column" layout-xs="column" layout-margin>
         <tri-widget google-geochart-widget flex ng-repeat="project in projectController.searchResult.content" title="{{project.title}}" subtitle="{{project.summary}}" title-position="top" content-padding>
             <p>{{project.description}}</p>
-        </tri-widget>        
+        </tri-widget> 
+        <cardflow model="cardflowSnap" mode="swipeSnap">
+                <div class="cardflow-card" ng-repeat="project in projectController.searchResult.content" >
+                    {{ project.title }}
+                </div>
+        </cardflow>        
     </div>
 </div>
