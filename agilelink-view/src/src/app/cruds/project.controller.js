@@ -50,7 +50,6 @@
         			searchResult.columns[i_x] = array;
         		}
         		array.push(value);
-        		console.log(array);
         	});
         };
         
