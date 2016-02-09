@@ -1,12 +1,19 @@
-<div class="dashboard-container overlay-10 padded-content-page" layout="column">    
-    <div layout="row" layout-md="column" layout-xs="column" layout-margin>
-        <p class="md-body-2 opacity-60 margin-top-0 margin-bottom-0" translate>
-            Exibindo projetos de {{projectController.searchResult.number + 1}} até {{(projectController.searchResult.number+1) * projectController.searchResult.size}} de {{projectController.searchResult.totalElements}}
-        </p>
-    </div>
-    <div layout="row" layout-md="column" layout-xs="column" layout-margin>
-        <tri-widget google-geochart-widget flex ng-repeat="project in projectController.searchResult.content" title="{{project.title}}" subtitle="{{project.summary}}" title-position="top" content-padding>
-            <p>{{project.description}}</p>
-        </tri-widget>        
-    </div>
+<div ng-controller="ProjectController as pc" ng-cloak >
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="33" layout="column" ng-repeat="column in pc.searchResult.columns">
+	    <md-card ng-repeat="project in column" >
+		   	<md-card-content>
+		       	<div class="content-padded">
+		           	<h2 class="md-title">{{ project.title }}</h2>
+		           	<p>{{ project.description }}</p>
+		       	</div>
+		        <md-divider></md-divider>
+		        <div class="button-toolbar" layout="row" layout-align="start center">
+		            <md-button class="md-accent">Share</md-button>
+		            <md-button class="md-primary" ng-click="pc.detail()">Explore</md-button>
+		        </div>
+		   	</md-card-content>
+		</md-card>		
+	</div>
+  </md-content>
 </div>
