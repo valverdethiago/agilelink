@@ -6,3 +6,7 @@ target
 .classpath
 .project
 .tmp
+/agilelink-view/
+/agilelink-service/
+/agilelink-web/
+/agilelink-model/
