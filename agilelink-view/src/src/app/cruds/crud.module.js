@@ -2,6 +2,5 @@
     'use strict';
 
     angular
-        .module('crud-module', [
-        ]);
+        .module('crud-module', ['brantwills.paging']);
 })();

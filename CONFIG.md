@@ -50,5 +50,7 @@ npm install gulp-csso
 npm install gulp-replace  
 npm install gulp-rev-replace  
 npm install gulp-eslint  
+npm install eslint-plugin-angular  
+
 
 gulp serve

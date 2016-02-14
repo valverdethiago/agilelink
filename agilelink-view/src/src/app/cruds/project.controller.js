@@ -14,9 +14,6 @@
             pageSize : 6,
             offset : 0
         };
-        $scope.$watch('projectController.pageRequest.pageNumber', function(newValue, oldValue) {
-        	console.log(newValue);
-        });
         
         projectController.find = find;
         projectController.detail = detail;
