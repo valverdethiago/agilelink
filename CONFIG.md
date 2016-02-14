@@ -54,4 +54,8 @@ npm install gulp-autoprefixer
 
 npm install gulp-angular-filesort
 
+npm install gulp-if
+
+npm install del
+
 gulp serve
