@@ -1,0 +1,27 @@
+<div ng-controller="RodrigoController as pc" ng-cloak >
+	
+	<md-button class="md-accent" ng-click="pc.filtroZeroKm()">0 km</md-button>
+	<md-button class="md-accent" ng-click="pc.filtroUsados()">Usados</md-button>
+	<md-button class="md-accent" ng-click="pc.limpaFiltros()">Limpar</md-button><br />
+    Total : {{pc.count()}}
+    <br/>
+    <table border="1" style="width: 100%">
+    	<thead>
+    		<tr>
+    			<td width="20%">Versão</td>
+    			<td width="60%">Marca</td>
+    			<td width="20%">Categoria</td>
+    		</tr>
+    	</thead>
+    	<tr dir-paginate="reg in pc.result|filter:pc.search:strict|itemsPerPage:5" >
+    		<td>{{reg.Versao}}</td>
+    		<td>{{reg.Marca}}</td>
+    		<td>{{reg.Categoria}}</td>
+    	</tr>
+    </table>
+    <br/>
+	
+    <br/>
+    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+    </dir-pagination-controls>
+</div> 
