@@ -16,4 +16,20 @@
 			</md-card>		
 		</div>
   	</md-content>
+  	<div ng-show="false">
+  		<span 
+  			dir-paginate="reg in pc.searchResult.content|itemsPerPage:pc.pageRequest.pageSize" 
+  			total-items="pc.searchResult.totalElements" 
+  			current-page="pc.searchResult.number" />
+  	</div>  	
+    <dir-pagination-controls 
+    	max-size="5" 
+    	direction-links="true" 
+    	boundary-links="true" 
+    	total-items="pc.searchResult.totalElements" 
+    	current-page="pc.searchResult.number"
+    	on-page-change="pc.onPageChange(newPageNumber)">
+    </dir-pagination-controls>
+
+    
 </div> 

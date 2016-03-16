@@ -17,6 +17,7 @@
         ////////////////
 
         function resetClick() {
+        	
             $http({
                 method: 'POST',
                 url: API_CONFIG.url + 'reset',
@@ -42,6 +43,7 @@
                     .hideDelay(5000)
                 );
             });
+            
         }
     }
 })();

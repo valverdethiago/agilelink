@@ -4,9 +4,10 @@
     angular
         .module('crud-module')
         .config(rootModuleConfig);
+    
 
     /* @ngInject */
-    function rootModuleConfig($translatePartialLoaderProvider, $stateProvider) {
+    function rootModuleConfig($translatePartialLoaderProvider, $stateProvider, paginationTemplateProvider) {
         $translatePartialLoaderProvider.addPart('app/cruds');
 
         $stateProvider
@@ -22,5 +23,6 @@
             controller: 'ProjectController',
             controllerAs: 'projectController'
         });
+        paginationTemplateProvider.setPath('app/util/new-pagination.tpl.html');
     }
 })();

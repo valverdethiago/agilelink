@@ -20,6 +20,7 @@
         ////////////////
 
         function signupClick() {
+        	
             $http({
                 method: 'POST',
                 url: API_CONFIG.url + 'signup',
@@ -45,6 +46,7 @@
                     .hideDelay(5000)
                 );
             });
+            
         }
     }
 })();

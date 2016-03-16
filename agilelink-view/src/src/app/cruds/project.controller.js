@@ -16,14 +16,15 @@
         };
         
         projectController.find = find;
-        projectController.detail = detail;
+        projectController.onPageChange = onPageChange;
         projectController.adjustSearchResultForGrid = adjustSearchResultForGrid;
         
         function find() {        
             projectService.find(projectController.pageRequest)
         	.success(function(searchResult) {
         		projectController.adjustSearchResultForGrid(searchResult);
-        		projectController.searchResult = searchResult;        		
+        		projectController.searchResult = searchResult;  
+        		$scope.searchResult = searchResult;
         		console.log(searchResult);
         	})
         	.error(function (error) {
@@ -50,25 +51,13 @@
         	});
         };
         
-        function detail(event, project) {
-//        	console.log(event);        
-//        	console.log(project);
-        	projectController.entity = project;
-        	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-            $mdDialog.show({ 
-                controller: ProjectController,
-                templateUrl: 'app/cruds/project_detail.html',
-                parent: angular.element(document.body),
-                targetEvent: event,
-                clickOutsideToClose: true,
-                fullscreen: useFullScreen
-              })
-              .then(function(answer) {
-                console.log(answer);
-              }, function() {
-                console.log('You cancelled the dialog.');
-              });
-        };
+        function onPageChange(newPageNumber) {
+        	var pageRequest = projectController.pageRequest;
+        	console.log(newPageNumber);
+        	pageRequest.pageNumber = newPageNumber;
+        	projectController.pageRequest.offset = projectController.pageRequest.pageSize * (newPageNumber - 1);
+            projectController.find();   
+        }
         
         (function init() {             
             projectController.find();            
