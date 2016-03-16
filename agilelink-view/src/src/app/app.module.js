@@ -10,7 +10,8 @@
             // uncomment above to activate the example seed module
             'brantwills.paging',
             'app.examples',
-            'crud-module'
+            'crud-module',
+            'rodrigo-module'
         ])
         // create a constant for languages so they can be added to both triangular & translate
         .constant('APP_LANGUAGES', [{

@@ -7,7 +7,7 @@
         
 
     /* @ngInject */
-    function ProjectController($scope, $http, projectService) {
+    function ProjectController($scope, $http, $mdDialog, $mdMedia, projectService) {
         var projectController = this;
         projectController.pageRequest = {
             pageNumber : 1,
@@ -50,9 +50,25 @@
         	});
         };
         
-        function detail(project) {
-        	alert(project.title);
-        }
+        function detail(event, project) {
+//        	console.log(event);        
+//        	console.log(project);
+        	projectController.entity = project;
+        	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+            $mdDialog.show({ 
+                controller: ProjectController,
+                templateUrl: 'app/cruds/project_detail.html',
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: true,
+                fullscreen: useFullScreen
+              })
+              .then(function(answer) {
+                console.log(answer);
+              }, function() {
+                console.log('You cancelled the dialog.');
+              });
+        };
         
         (function init() {             
             projectController.find();            
