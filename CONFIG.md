@@ -51,6 +51,11 @@ npm install gulp-replace
 npm install gulp-rev-replace  
 npm install gulp-eslint  
 npm install eslint-plugin-angular  
+npm install isarray  
+npm install is-number  
+npm install randomatic  
+npm install repeat-string  
+
 
 
 gulp serve
