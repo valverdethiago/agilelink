@@ -25,7 +25,6 @@
         		projectController.adjustSearchResultForGrid(searchResult);
         		projectController.searchResult = searchResult;  
         		$scope.searchResult = searchResult;
-        		console.log(searchResult);
         	})
         	.error(function (error) {
         		console.log(error);
@@ -53,7 +52,6 @@
         
         function onPageChange(newPageNumber) {
         	var pageRequest = projectController.pageRequest;
-        	console.log(newPageNumber);
         	pageRequest.pageNumber = newPageNumber;
         	projectController.pageRequest.offset = projectController.pageRequest.pageSize * (newPageNumber - 1);
             projectController.find();   
