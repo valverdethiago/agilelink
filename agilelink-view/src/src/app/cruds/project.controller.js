@@ -7,47 +7,23 @@
         
 
     /* @ngInject */
-    function ProjectController($scope, $http, $mdDialog, $mdMedia, projectService) {
+    function ProjectController($scope, $http, $mdDialog, $mdMedia, projectService, defaultPageRequest, adjustSearchResultForGrid) {
         var projectController = this;
-        projectController.pageRequest = {
-            pageNumber : 1,
-            pageSize : 6,
-            offset : 0
-        };
+        projectController.pageRequest = {}
+        angular.copy(defaultPageRequest, projectController.pageRequest);
         
         projectController.find = find;
         projectController.onPageChange = onPageChange;
-        projectController.adjustSearchResultForGrid = adjustSearchResultForGrid;
         
         function find() {        
             projectService.find(projectController.pageRequest)
         	.success(function(searchResult) {
-        		projectController.adjustSearchResultForGrid(searchResult);
+        		adjustSearchResultForGrid(searchResult, projectController.pageRequest);
         		projectController.searchResult = searchResult;  
-        		$scope.searchResult = searchResult;
         	})
         	.error(function (error) {
         		console.log(error);
         	});        	
-        };
-        
-        function adjustSearchResultForGrid(searchResult) { 		
-    		searchResult.limit = (searchResult.number + 1) * searchResult.numberOfElements;        		
-        	if( searchResult.content.length < 3 ) {
-        		searchResult.columns = new Array(searchResult.content.length);        		
-        	}
-        	if( searchResult.content.length >= 3 ) {
-        		searchResult.columns = new Array(3);
-        	}
-        	searchResult.content.forEach(function (value, i) {
-        		var i_x = i % 3;
-        		var array = searchResult.columns[i_x];
-        		if(typeof array == 'undefined') {
-        			array = new Array();
-        			searchResult.columns[i_x] = array;
-        		}
-        		array.push(value);
-        	});
         };
         
         function onPageChange(newPageNumber) {
