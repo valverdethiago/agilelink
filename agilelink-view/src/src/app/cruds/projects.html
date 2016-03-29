@@ -1,4 +1,7 @@
 <div ng-controller="ProjectController as pc" ng-cloak >
+	<md-button class="md-fab" aria-label="New">
+       <md-icon class="material-icons">add</md-icon>
+    </md-button>
   	<md-content class="md-padding" layout-xs="column" layout="row">
     	<div flex-xs flex-gt-xs="33" layout="column" ng-repeat="column in pc.searchResult.columns">
 	    	<md-card ng-repeat="project in column" >

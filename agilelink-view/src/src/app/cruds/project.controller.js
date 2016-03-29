@@ -7,10 +7,10 @@
         
 
     /* @ngInject */
-    function ProjectController($scope, $http, $mdDialog, $mdMedia, projectService, defaultPageRequest, adjustSearchResultForGrid) {
+    function ProjectController($scope, $http, $mdDialog, $mdMedia, projectService, util) {
         var projectController = this;
         projectController.pageRequest = {}
-        angular.copy(defaultPageRequest, projectController.pageRequest);
+        angular.copy(util.defaultPageRequest, projectController.pageRequest);
         
         projectController.find = find;
         projectController.onPageChange = onPageChange;
@@ -18,7 +18,7 @@
         function find() {        
             projectService.find(projectController.pageRequest)
         	.success(function(searchResult) {
-        		adjustSearchResultForGrid(searchResult, projectController.pageRequest);
+        		util.adjustSearchResultForGrid(searchResult, projectController.pageRequest);
         		projectController.searchResult = searchResult;  
         	})
         	.error(function (error) {
