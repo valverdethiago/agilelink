@@ -14,6 +14,7 @@
         
         projectController.find = find;
         projectController.onPageChange = onPageChange;
+        projectController.detail = detail;
         
         function find() {        
             projectService.find(projectController.pageRequest)
@@ -31,11 +32,44 @@
         	pageRequest.pageNumber = newPageNumber;
         	projectController.pageRequest.offset = projectController.pageRequest.pageSize * (newPageNumber - 1);
             projectController.find();   
-        }
+        };
+
+        
+        function detail(event, project) {
+        	projectController.entity = project;
+        	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+            $mdDialog.show({ 
+                controller: DialogController,
+                templateUrl: 'app/cruds/project_detail.html',
+                parent: angular.element(document.body),
+                targetEvent: event,
+                clickOutsideToClose: true,
+                fullscreen: useFullScreen,
+                locals: {
+                    entity: project
+                }
+              });
+        };
         
         (function init() {             
             projectController.find();            
         })();
+        
+        function DialogController($scope, $mdDialog, entity ) {
+            $scope.entity = entity;
+            $scope.closeDialog = closeDialog;
+            $scope.save = save;
+            
+            function closeDialog() {
+                $mdDialog.hide();
+            };
+            
+            function save() {
+            	console.log('Salvou : '+entity.title);
+            	entity={}
+                $mdDialog.hide();            	
+            };
+        };
         
     }
 })();
