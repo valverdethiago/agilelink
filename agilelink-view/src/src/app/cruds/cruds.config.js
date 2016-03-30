@@ -3,15 +3,19 @@
 
     var module = angular
         .module('crud-module')
-        .config(rootModuleConfig)
+        .config(rootModuleConfig);
     
-    module.constant('defaultPageRequest', {
-       	itensPerLine : 3,
-        pageNumber : 1,
-        pageSize : 6,
-        offset : 0
-    });
-    module.constant('adjustSearchResultForGrid', adjustSearchResultForGrid); 
+    var util = {
+    	defaultPageRequest : {
+           	itensPerLine : 3,
+            pageNumber : 1,
+            pageSize : 6,
+            offset : 0
+    	},
+    	adjustSearchResultForGrid : adjustSearchResultForGrid
+    };
+    
+    module.constant('util', util);
     
 
     /* @ngInject */
@@ -34,7 +38,7 @@
         paginationTemplateProvider.setPath('app/util/new-pagination.tpl.html');         
     };
     
-    function adjustSearchResultForGrid(searchResult, pageRequest) { 		
+    function adjustSearchResultForGrid(searchResult, pageRequest) {	
 		searchResult.limit = (searchResult.number + 1) * searchResult.numberOfElements;        		
     	if( searchResult.content.length < pageRequest.itensPerLine ) {
     		searchResult.columns = new Array(searchResult.content.length);        		
@@ -52,6 +56,7 @@
     		array.push(value);
     	});
     };
+    
     
     
 })();
