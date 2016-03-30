@@ -8,8 +8,7 @@
 
     /* @ngInject */
     function ProjectService($http) {
-    	var urlBase = '/rest/project' 
-        var someValue = '';
+    	var urlBase = '/rest/project' ;
         var service = {
             save: save,
             load: load,
@@ -20,7 +19,7 @@
         return service;
         
         function save(project) {
-        	$http.put(urlBase+'/save', project);
+        	$http.post(urlBase+'/save', project);
         };
 
         function load (id) {

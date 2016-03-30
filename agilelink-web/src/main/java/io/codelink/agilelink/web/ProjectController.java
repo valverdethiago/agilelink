@@ -2,7 +2,6 @@ package io.codelink.agilelink.web;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,7 +27,8 @@ public class ProjectController {
 		return service.loadProject(id);
 	}
 
-	@RequestMapping(value = "/save", method = PUT)
+	@RequestMapping(value = "/save", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Project save(@RequestBody Project project) {
 		return service.saveProject(project);
 	}
