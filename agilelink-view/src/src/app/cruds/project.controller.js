@@ -7,13 +7,16 @@
         
 
     /* @ngInject */
-    function ProjectController($scope, $http, $mdDialog, $mdMedia, projectService, util) {
+    function ProjectController($scope, ,$mdDialog, $mdMedia, $mdToast, projectService, util) {
         var projectController = this;
         angular.copy(util.defaultPageRequest, projectController.pageRequest = {});
         
         projectController.find = find;
         projectController.onPageChange = onPageChange;
         projectController.detail = detail;
+        projectController.save = save;
+        projectController.closeDialog = closeDialog;
+        projectController.openDialog = openDialog;
         
         function find() {        
             projectService.find(projectController.pageRequest)
@@ -29,50 +32,51 @@
         function onPageChange(newPageNumber) {
         	var pageRequest = projectController.pageRequest;
         	pageRequest.pageNumber = newPageNumber;
-        	projectController.pageRequest.offset = projectController.pageRequest.pageSize * (newPageNumber - 1);
+        	projectController.pageRequest.offset = pageRequest.pageSize * (newPageNumber - 1);
             projectController.find();   
         };
-
         
-        function detail(event, project) {
-        	projectController.entity = project;
-        	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+        function detail(event, entity) {
+            angular.copy(entity, projectController.entity = {});
+            openDialog(event);
+        };
+        
+        function save(entity) {        
+            projectService.save(entity)
+        	.success(function(result) {
+            	util.showMessage($mdToast, 'Project '+entity.title+' saved successfully : ');
+            	closeDialog();
+                find();   
+        	})
+        	.error(function (error) {
+            	util.showMessage($mdToast, 'An error has occurred. Try again later. ');
+        	});        	
+        };
+        
+        function openDialog(event) {
             $mdDialog.show({ 
                 controller: DialogController,
                 templateUrl: 'app/cruds/project_detail.html',
                 parent: angular.element(document.body),
                 targetEvent: event,
                 clickOutsideToClose: true,
-                fullscreen: useFullScreen,
+                fullscreen: ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen,
                 locals: {
-                    entity: project
+                	projectController : projectController
                 }
-              });
+              });        	
+        }
+        
+        function closeDialog() {
+            $mdDialog.hide();
         };
         
         (function init() {             
             projectController.find();            
         })();
         
-        function DialogController($scope, $mdDialog, $mdToast, util, projectService, entity ) {
-            angular.copy(entity, $scope.entity = {});
-            $scope.closeDialog = closeDialog;
-            $scope.save = save;
-            
-            function closeDialog() {
-                $mdDialog.hide();
-            };
-            
-            function save(entity) {        
-                projectService.save(entity)
-            	.success(function(result) {
-                	util.showMessage($mdToast, 'Project '+$scope.entity.title+' saved successfully : ');
-                	closeDialog();
-            	})
-            	.error(function (error) {
-                	util.showMessage($mdToast, 'An error has occurred. Try again later. ');
-            	});        	
-            };
+        function DialogController($scope, projectController ) {
+            $scope.controller = projectController;            
         };
         
     }

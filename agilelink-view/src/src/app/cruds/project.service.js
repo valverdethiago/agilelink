@@ -19,11 +19,11 @@
         return service;
         
         function save(project) {
-        	$http.post(urlBase+'/save', project);
+        	return $http.post(urlBase+'/save', project);
         };
 
         function load (id) {
-        	$http.put(urlBase+'/load/' + id);
+        	return $http.put(urlBase+'/load/' + id);
         };
 
         function remove (id) {

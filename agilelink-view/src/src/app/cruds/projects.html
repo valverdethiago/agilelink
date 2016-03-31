@@ -1,5 +1,5 @@
 <div ng-controller="ProjectController as pc" ng-cloak >
-	<md-button class="md-fab" aria-label="New">
+	<md-button class="md-fab" aria-label="New" ng-click="pc.detail($event, {})">
        <md-icon class="material-icons">add</md-icon>
     </md-button>
   	<md-content class="md-padding" layout-xs="column" layout="row">
@@ -8,7 +8,7 @@
 		   		<md-card-content>
 		       		<div class="content-padded">
 		           		<h2 class="md-title">{{ project.title }}</h2>
-		           		<p>{{ project.description }}</p>
+		           		<p>{{ project.summary }}</p>
 		       		</div>
 		        	<md-divider></md-divider>
 		        	<div class="button-toolbar" layout="row" layout-align="start center">
