@@ -4,31 +4,31 @@
       <div class="md-toolbar-tools">
         <h2>Edit Project</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="closeDialog()">
-          <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        <md-button class="md-icon-button" ng-click="controller.closeDialog()">
+		   <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
         </md-button>
       </div>
     </md-toolbar>
     <md-dialog-content>
 		<div class="md-dialog-content">		
-			<form name="userForm">
+			<form name="projectForm">
 		      	<md-input-container  class="md-block">
 		       		<label>Title</label>
-		       		<input ng-model="controller.entity.title" md-maxlength="30" >
+		       		<input ng-model="controller.entity.title" md-maxlength="30" ng-required="true">
 		      	</md-input-container>
 		       		<md-input-container class="md-block">
 		       			<label>Summary</label>
-		       			<textarea ng-model="controller.entity.summary" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+		       			<textarea ng-model="controller.entity.summary" md-maxlength="150" rows="5" md-select-on-focus  ng-required="true" ></textarea>
 		      		</md-input-container>
 		  		<md-input-container class="md-block">
 		        	<label>Description</label>
-		        	<textarea ng-model="controller.entity.description" md-maxlength="300" rows="10" md-select-on-focus></textarea>
+		        	<textarea ng-model="controller.entity.description" md-maxlength="300" rows="10" md-select-on-focus  ng-required="true" ></textarea>
 		        </md-input-container>		  
 		     </form>
 		</div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-		<md-button class="md-accent" ng-click="controller.save(controller.entity)">Save</md-button>
+		<md-button class="md-accent" ng-click="controller.save(controller.entity)" ng-disabled="projectForm.$invalid">Save</md-button>
 		<md-button class="md-primary" ng-click="controller.closeDialog()" >Cancel</md-button>
     </md-dialog-actions>
   </form>

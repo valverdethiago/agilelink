@@ -1,38 +1,47 @@
 <div ng-controller="ProjectController as pc" ng-cloak >
-	<md-button class="md-fab" aria-label="New" ng-click="pc.detail($event, {})">
-       <md-icon class="material-icons">add</md-icon>
-    </md-button>
   	<md-content class="md-padding" layout-xs="column" layout="row">
-    	<div flex-xs flex-gt-xs="33" layout="column" ng-repeat="column in pc.searchResult.columns">
-	    	<md-card ng-repeat="project in column" >
-		   		<md-card-content>
-		       		<div class="content-padded">
-		           		<h2 class="md-title">{{ project.title }}</h2>
-		           		<p>{{ project.summary }}</p>
-		       		</div>
-		        	<md-divider></md-divider>
-		        	<div class="button-toolbar" layout="row" layout-align="start center">
-		            	<md-button class="md-accent">Open</md-button>
-		            	<md-button class="md-primary" ng-click="pc.detail($event, project)">Edit</md-button>
-		        	</div>
-		   		</md-card-content>
-			</md-card>		
+  		<div flex-xs flex-gt-xs="5" layout="column" >
+		    <md-button 
+		    	ng-click="pc.detail($event, {})" 
+		    	class="md-fab md-accent md-fab-top-left" 
+		    	aria-label="New">
+		    	<md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
+		    	<md-tooltip>New</md-tooltip>
+			</md-button>
 		</div>
-  	</md-content>
-  	<div ng-show="false">
-  		<span 
-  			dir-paginate="reg in pc.searchResult.content|itemsPerPage:pc.pageRequest.pageSize" 
-  			total-items="pc.searchResult.totalElements" 
-  			current-page="pc.searchResult.number" />
-  	</div>  	
-    <dir-pagination-controls 
-    	max-size="2" 
-    	direction-links="true" 
-    	boundary-links="true" 
-    	total-items="pc.searchResult.totalElements" 
-    	current-page="pc.searchResult.number"
-    	on-page-change="pc.onPageChange(newPageNumber)">
-    </dir-pagination-controls>
-
+  		<div flex-xs flex-gt-xs="95" layout="column" >
+		  	<md-content class="md-padding" layout-xs="column" layout="row">
+		    	<div flex-xs flex-gt-xs="33" layout="column" ng-repeat="column in pc.searchResult.columns">
+			    	<md-card ng-repeat="project in column" >
+				   		<md-card-content>
+				       		<div class="content-padded">
+				           		<h2 class="md-title">{{ project.title }}</h2>
+				           		<p>{{ project.summary }}</p>
+				       		</div>
+				        	<md-divider></md-divider>
+				        	<div class="button-toolbar" layout="row" layout-align="end center">
+				            	<md-button class="md-accent"ng-click="pc.open($event, project)">Open</md-button>
+				            	<md-button class="md-primary" ng-click="pc.detail($event, project)">Edit</md-button>
+				        	</div>
+				   		</md-card-content>
+					</md-card>		
+				</div>
+		  	</md-content>
+		  	<div ng-show="false">
+		  		<span 
+		  			dir-paginate="reg in pc.searchResult.content|itemsPerPage:pc.pageRequest.pageSize" 
+		  			total-items="pc.searchResult.totalElements" 
+		  			current-page="pc.searchResult.number" />
+		  	</div>  	
+		    <dir-pagination-controls 
+		    	max-size="2" 
+		    	direction-links="true" 
+		    	boundary-links="true" 
+		    	total-items="pc.searchResult.totalElements" 
+		    	current-page="pc.searchResult.number"
+		    	on-page-change="pc.onPageChange(newPageNumber)">
+		    </dir-pagination-controls>
+		</div>
+	</md-content>
     
 </div> 

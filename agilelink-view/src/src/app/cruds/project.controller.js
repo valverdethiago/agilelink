@@ -7,13 +7,14 @@
         
 
     /* @ngInject */
-    function ProjectController($scope, ,$mdDialog, $mdMedia, $mdToast, projectService, util) {
+    function ProjectController($scope, $mdDialog, $mdMedia, $mdToast, projectService, util) {
         var projectController = this;
         angular.copy(util.defaultPageRequest, projectController.pageRequest = {});
         
         projectController.find = find;
         projectController.onPageChange = onPageChange;
         projectController.detail = detail;
+        projectController.open = open;
         projectController.save = save;
         projectController.closeDialog = closeDialog;
         projectController.openDialog = openDialog;
@@ -41,10 +42,14 @@
             openDialog(event);
         };
         
+        function open(event, entity) {
+        	util.showMessage($mdToast, 'Not yet implemented.');
+        }
+        
         function save(entity) {        
             projectService.save(entity)
         	.success(function(result) {
-            	util.showMessage($mdToast, 'Project '+entity.title+' saved successfully : ');
+            	util.showMessage($mdToast, 'Project '+entity.title+' saved successfully.');
             	closeDialog();
                 find();   
         	})

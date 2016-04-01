@@ -10,8 +10,7 @@
             // uncomment above to activate the example seed module
             'angularUtils.directives.dirPagination',
             'app.examples',
-            'crud-module',
-            'rodrigo-module'
+            'crud-module'
         ])
         // create a constant for languages so they can be added to both triangular & translate
         .constant('APP_LANGUAGES', [{
