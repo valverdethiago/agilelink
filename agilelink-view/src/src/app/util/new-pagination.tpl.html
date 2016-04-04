@@ -1,0 +1,43 @@
+<section layout="row" layout-sm="column" layout-align="center center" layout-wrap >
+	<md-button 
+		class="md-icon-button" 
+		type="button" 
+		aria-label="First"
+      	ng-click="setCurrent(1)" 
+      	ng-disabled="pagination.current == 1" >
+	  <md-icon md-svg-icon="\assets\images\svg\navigate-first.svg"></md-icon>
+	</md-button>
+	<md-button 
+		class="md-icon-button" 
+		type="button" 
+		aria-label="Previous"
+      	ng-click="setCurrent(pagination.current - 1)" 
+      	ng-disabled="pagination.current == 1"  >
+	  <md-icon md-svg-icon="\assets\images\svg\navigate-before.svg"></md-icon>
+	</md-button>
+	        
+    <md-button 
+      	class="md-button"
+      	ng-click="setCurrent(pageNumber)"
+      	ng-disabled="pageNumber == '...' || pagination.current == pageNumber" 
+		ng-repeat="pageNumber in pages track by tracker(pageNumber, $index)">
+      	{{ pageNumber }}
+    </md-button>   
+    
+	<md-button 
+		class="md-icon-button" 
+		type="button" 
+		aria-label="Next"
+      	ng-click="setCurrent(pagination.current + 1)"
+      	ng-disabled="pagination.current == pagination.last" >
+	  <md-icon md-svg-icon="\assets\images\svg\navigate-next.svg"></md-icon>
+	</md-button>
+	<md-button 
+		class="md-icon-button" 
+		type="button" 
+		aria-label="Last"
+      	ng-click="setCurrent(pagination.last)" 
+      	ng-disabled="pagination.current == pagination.last">
+	  <md-icon md-svg-icon="\assets\images\svg\navigate-last.svg"></md-icon>
+	</md-button>
+</section>
