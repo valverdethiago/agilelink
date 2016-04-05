@@ -1,5 +1,5 @@
 <div ng-controller="ProjectController as pc" ng-cloak >
-  	<md-content class="md-padding" layout-xs="column" layout="row">
+  	<md-content class="md-padding" layout-xs="column" layout="row" ng-show="pc.searchResult.totalElements > 0">
   		<div flex-xs flex-gt-xs="5" layout="column" >
 		    <md-button 
 		    	ng-click="pc.detail($event, {})" 
@@ -43,5 +43,14 @@
 		    </dir-pagination-controls>
 		</div>
 	</md-content>
+  	<md-content class="md-padding" layout-xs="column" layout="row" ng-show="pc.searchResult.totalElements <= 0">	
+  		<p>
+  			Feels empty? Click the button bellow to create a new project
+		</p>  		
+  		<md-button class="md-grid-item-content" ng-click="pc.detail($event, {})">
+          <md-icon md-font-icon="fa fa-magic"></md-icon>
+          <div class="md-grid-text"> Create new project</div>
+        </md-button>
+  	</md-content>
     
 </div> 
