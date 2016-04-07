@@ -1,16 +1,15 @@
 <div ng-controller="ProjectController as pc" ng-cloak >
   	<md-content class="md-padding" layout-xs="column" layout="row">
-  		<div flex-xs flex-gt-xs="5" layout="column" >
+  		<div flex="5" flex-xs="100" layout="column" >
 		    <md-button 
-		    	ng-click="pc.detail($event, {})" 
+		    	ng-click="pc.createNew($event)" 
 		    	class="md-fab md-accent md-fab-top-left" 
 		    	aria-label="New">
-<!-- 		    	<md-icon md-font-icon="zmdi zmdi-plus"></md-icon> -->
-					<md-icon md-font-icon="fa fa-magic"></md-icon>
+		    	<md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
 		    	<md-tooltip>New</md-tooltip>
 			</md-button>
 		</div>
-  		<div flex-xs flex-gt-xs="95" layout="column" >
+  		<div flex="95" flex-xs="100" layout="column" >
 		  	<md-content class="md-padding" layout-xs="column" layout="row">
 		    	<div flex-xs flex-gt-xs="33" layout="column" ng-repeat="column in pc.searchResult.columns">
 			    	<md-card ng-repeat="project in column" >
