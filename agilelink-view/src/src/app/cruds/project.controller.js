@@ -14,6 +14,7 @@
         projectController.find = find;
         projectController.onPageChange = onPageChange;
         projectController.detail = detail;
+        projectController.createNew = createNew;
         projectController.open = open;
         projectController.save = save;
         projectController.closeDialog = closeDialog;
@@ -38,9 +39,15 @@
         };
         
         function detail(event, entity) {
+        	console.log(entity);
             angular.copy(entity, projectController.entity = {});
             openDialog(event);
         };
+        
+        function createNew(event) {
+            projectController.entity = {};
+            openDialog(event);
+        }
         
         function open(event, entity) {
         	util.showMessage($mdToast, 'Not yet implemented.');
@@ -58,7 +65,7 @@
         	});        	
         };
         
-        function openDialog(event) {
+        function openDialog(event, title) {
             $mdDialog.show({ 
                 controller: DialogController,
                 templateUrl: 'app/cruds/project_detail.html',
@@ -67,7 +74,8 @@
                 clickOutsideToClose: true,
                 fullscreen: ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen,
                 locals: {
-                	projectController : projectController
+                	projectController : projectController,
+                	title : title
                 }
               });        	
         }
@@ -80,8 +88,8 @@
             projectController.find();            
         })();
         
-        function DialogController($scope, projectController ) {
-            $scope.controller = projectController;            
+        function DialogController($scope, projectController) {
+            $scope.controller = projectController;  
         };
         
     }

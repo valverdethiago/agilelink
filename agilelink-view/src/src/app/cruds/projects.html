@@ -1,15 +1,15 @@
 <div ng-controller="ProjectController as pc" ng-cloak >
   	<md-content class="md-padding" layout-xs="column" layout="row" ng-show="pc.searchResult.totalElements > 0">
-  		<div flex-xs flex-gt-xs="5" layout="column" >
+  		<div flex="5" flex-xs="100" layout="column" >
 		    <md-button 
-		    	ng-click="pc.detail($event, {})" 
+		    	ng-click="pc.createNew($event)" 
 		    	class="md-fab md-accent md-fab-top-left" 
 		    	aria-label="New">
 		    	<md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
 		    	<md-tooltip>New</md-tooltip>
 			</md-button>
 		</div>
-  		<div flex-xs flex-gt-xs="95" layout="column" >
+  		<div flex="95" flex-xs="100" layout="column" >
 		  	<md-content class="md-padding" layout-xs="column" layout="row">
 		    	<div flex-xs flex-gt-xs="33" layout="column" ng-repeat="column in pc.searchResult.columns">
 			    	<md-card ng-repeat="project in column" >
@@ -20,8 +20,8 @@
 				       		</div>
 				        	<md-divider></md-divider>
 				        	<div class="button-toolbar" layout="row" layout-align="end center">
-				            	<md-button class="md-accent"ng-click="pc.open($event, project)">Open</md-button>
-				            	<md-button class="md-primary" ng-click="pc.detail($event, project)">Edit</md-button>
+				            	<md-button class="md-accent"ng-click="pc.open($event, project)">{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.OPEN' | translate }}</md-button>
+				            	<md-button class="md-primary" ng-click="pc.detail($event, project)">{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.EDIT' | translate }}</md-button>
 				        	</div>
 				   		</md-card-content>
 					</md-card>		
@@ -44,12 +44,10 @@
 		</div>
 	</md-content>
   	<md-content class="md-padding" layout-xs="column" layout="row" ng-show="pc.searchResult.totalElements <= 0">	
-  		<p>
-  			Feels empty? Click the button bellow to create a new project
-		</p>  		
-  		<md-button class="md-grid-item-content" ng-click="pc.detail($event, {})">
+  		<p >{{ 'CRUDS.PROJECTS.MESSAGES.NO_PROJECTS' | translate}}</p>  		
+  		<md-button class="md-grid-item-content" ng-click="pc.createNew($event)">
           <md-icon md-font-icon="fa fa-magic"></md-icon>
-          <div class="md-grid-text"> Create new project</div>
+          <div class="md-grid-text" >{{ 'CRUDS.PROJECTS.MESSAGES.NEW_PROJECT' | translate}}</div>
         </md-button>
   	</md-content>
     
