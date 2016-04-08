@@ -9,8 +9,6 @@
     /* @ngInject */
     function ProjectController($scope, $mdDialog, $mdMedia, $mdToast, $translate, projectService, util) {
         var projectController = this;
-        angular.copy(util.defaultPageRequest, projectController.pageRequest = {});
-        projectController.pageRequest.onlyActives = true;
         
         projectController.find = find;
         projectController.onPageChange = onPageChange;
@@ -20,8 +18,31 @@
         projectController.save = save;
         projectController.closeDialog = closeDialog;
         projectController.openDialog = openDialog;
+        projectController.activate = activate;
         projectController.archive = archive;
         projectController.confirmArchivation = confirmArchivation;
+        projectController.init = init;
+        projectController.canArchive = canArchive;
+        projectController.canActivate = canActivate;
+        
+        
+        function init() {
+            angular.copy(util.defaultPageRequest, projectController.pageRequest = {});
+        	projectController.pageRequest.onlyActives = true;
+        	projectController.find();    
+        	$scope.$watch('pc.pageRequest.searchTerm', function(newValue, oldValue) {
+        		console.log(newValue);
+        		if(util.isUndefinedOrNull(newValue)) {
+        			return;
+        		}
+        		if(newValue.length >3) {
+        			projectController.find();
+        		}
+        	});
+        	$scope.$watch('pc.pageRequest.onlyActives', function(newValue, oldValue) {
+    			projectController.find();
+        	});
+        };
         
         function find() {        
             projectService.find(projectController.pageRequest)
@@ -42,7 +63,6 @@
         };
         
         function detail(event, entity) {
-        	console.log(entity);
             angular.copy(entity, projectController.entity = {});
             openDialog(event);
         };
@@ -87,7 +107,34 @@
             projectService.archive(entity)
         	.success(function(result) {
             	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.SUCCESS.ARCHIVE'));
-                projectController.find();   
+            	closeDialog();
+                projectController.find();    
+        	})
+        	.error(function (error) {
+            	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.ERROR') );
+        	});        	
+        };
+        
+        function canArchive(entity) {
+        	if(util.isUndefinedOrNull(entity) || util.isUndefinedOrNull(entity.id)) {
+        		return false;
+        	}
+        	return util.isUndefinedOrNull(entity.archivationDate);
+        };
+        
+        function canActivate(entity) {
+        	if(util.isUndefinedOrNull(entity) || util.isUndefinedOrNull(entity.id)) {
+        		return false;
+        	}
+        	return !util.isUndefinedOrNull(entity.archivationDate) ;
+        }
+        
+        function activate(event, entity) {        
+            projectService.activate(entity)
+        	.success(function(result) {
+            	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.SUCCESS.ACTIVATE'));
+            	closeDialog();
+                find();   
         	})
         	.error(function (error) {
             	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.ERROR') );
@@ -107,21 +154,16 @@
                 	util : util
                 }
               });        	
-        }
+        };
         
         function closeDialog() {
             $mdDialog.hide();
         };
         
-        (function init() {             
-            projectController.find();            
-        })();
-        
         function DialogController($scope, projectController, util) {
             $scope.controller = projectController;  
-            $scope.util = util;
-            
+            $scope.util = util;            
         };
-        
+                
     }
 })();

@@ -12,7 +12,9 @@
 				"FIELDS" : {
 					"TITLE" : "Title",
 					"SUMMARY" : "Sumary",
-					"DESCRIPTION" : "Description"
+					"DESCRIPTION" : "Description",
+					"SEARCH" : "Search...",
+					"ONLY_ACTIVES" : "Show only active projects"
 				},
 				"BUTTONS" : {
 					"ARCHIVE" : "Archive",
@@ -21,7 +23,7 @@
 					"NEW" : "New",
 					"OK" : "Ok", 
 					"OPEN" : "Open", 
-					"REACTIVATE" : "Reactivate", 
+					"ACTIVATE" : "Activate", 
 					"SAVE" : "Save"
 				}					
 			},
@@ -32,7 +34,8 @@
 				"ERROR" : "An error has occurred. Try again later.", 
 				"SUCCESS" : {
 					"SAVE" : "Project saved successfully.",
-					"ARCHIVE" : "Project archived successfully."
+					"ARCHIVE" : "Project archived successfully.",
+					"ACTIVATE" : "Project activated successfully."
 				},
 				"CONFIRMATION" : {
 					"ARCHIVE" : "Would you like to archive the project?", 
@@ -41,7 +44,8 @@
 				"VALIDATION" : {
 					"TITLE" : "Please inform a valid title for the project",
 					"SUMMARY" : "Please inform a valid summary for the project",
-					"DESCRIPTION" : "Please inform a valid description for the project"
+					"DESCRIPTION" : "Please inform a valid description for the project",
+					"SEARCH_TERM_LENGTH" : "Please informa a term with 3 characters at least."
 				} 
 			}			
 		}				

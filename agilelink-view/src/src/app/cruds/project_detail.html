@@ -45,8 +45,28 @@
 		</div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-    	<md-button class="md-accent" ng-click="controller.confirmArchivation($event, controller.entity)" ng-if="!util.isUndefinedOrNull(controller.entity.id)">{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.ARCHIVE' | translate }}</md-button>
-		<md-button class="md-accent" ng-click="controller.save(controller.entity)" ng-disabled="projectForm.$invalid" >{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.SAVE' | translate }}</md-button>
-		<md-button class="md-primary" ng-click="controller.closeDialog()" >{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.CANCEL' | translate }}</md-button>
+    	<md-button 
+    		class="md-accent" 
+    		ng-click="controller.confirmArchivation($event, controller.entity)" 
+    		ng-if="controller.canArchive(controller.entity)">
+    			{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.ARCHIVE' | translate }}
+    	</md-button>
+    	<md-button 
+    		class="md-accent" 
+    		ng-click="controller.activate($event, controller.entity)" 
+    		ng-if="controller.canActivate(controller.entity)">
+    			{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.ACTIVATE' | translate }}
+    	</md-button>
+		<md-button 
+			class="md-accent" 
+			ng-click="controller.save(controller.entity)" 
+			ng-disabled="projectForm.$invalid" >
+			{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.SAVE' | translate }}
+		</md-button>
+		<md-button 
+			class="md-primary" 
+			ng-click="controller.closeDialog()" >
+			{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.CANCEL' | translate }}
+		</md-button>
     </md-dialog-actions>
 </md-dialog>

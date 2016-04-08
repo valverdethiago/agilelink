@@ -1,6 +1,26 @@
-<div ng-controller="ProjectController as pc" ng-cloak >
-  	<md-content class="md-padding" layout-xs="column" layout="row" ng-show="pc.searchResult.totalElements > 0">
-  		<div flex="5" flex-xs="100" layout="column" >
+<div ng-controller="ProjectController as pc" ng-cloak ng-init="pc.init()">  		
+  	<md-content class="md-padding" layout-xs="column" layout="row" >
+			<form name="searchForm" novalidate flex="100" layout="row" layout-align="center center" >
+	    		<md-input-container  class="md-block" flex="70">
+			    	<label translate>CRUDS.PROJECTS.LABELS.FIELDS.SEARCH</label>
+			    	<input ng-minlength="3" name="searchTerm" 
+			    		ng-model="pc.pageRequest.searchTerm" 
+			    		ng-model-options="{ updateOn: 'default', debounce: { 'default': 1000 } }" />
+			    	<div ng-messages="searchForm.searchTerm.$error">
+	                    <div ng-message when="minlength">
+	                        <span translate>CRUDS.PROJECTS.MESSAGES.VALIDATION.SEARCH_TERM_LENGTH</span>
+	                    </div>
+	                </div>
+			    </md-input-container>		    
+				<md-switch flex="30" class="md-warn" ng-model="pc.pageRequest.onlyActives" 
+					aria-label="{{'CRUDS.PROJECTS.LABELS.FIELDS.ONLY_ACTIVES' | translate }}" >
+				    {{'CRUDS.PROJECTS.LABELS.FIELDS.ONLY_ACTIVES' | translate }}
+				</md-switch>
+			</form>
+	</md-content>
+				
+  	<md-content class="md-padding" layout-xs="column" layout="row" >
+  		<div flex="5" flex-xs="100" layout="column" ng-show="pc.searchResult.totalElements > 0">
 		    <md-button 
 		    	ng-click="pc.createNew($event)" 
 		    	class="md-fab md-accent md-fab-top-left" 
@@ -9,7 +29,7 @@
 		    	<md-tooltip>New</md-tooltip>
 			</md-button>
 		</div>
-  		<div flex="95" flex-xs="100" layout="column" >
+  		<div flex="95" flex-xs="100" layout="column" ng-show="pc.searchResult.totalElements > 0">
 		  	<md-content class="md-padding" layout-xs="column" layout="row">
 		    	<div flex-xs flex-gt-xs="33" layout="column" ng-repeat="column in pc.searchResult.columns">
 			    	<md-card ng-repeat="project in column" >
@@ -43,9 +63,16 @@
 		    </dir-pagination-controls>
 		</div>
 	</md-content>
-  	<md-content class="md-padding" ng-show="pc.searchResult.totalElements <= 0">	
-  	  	<p flex="100" flex-xs="100" layout-align="center center">{{ 'CRUDS.PROJECTS.MESSAGES.NO_PROJECTS' | translate}}</p>  	  	
-  		<div  flex="100" flex-xs="100" layout="row" layout-wrap layout-margin layout-align="center center">
+  	<md-content 
+  		class="md-padding" 
+  		ng-show="pc.searchResult.totalElements <= 0" 
+  		layout="column" 
+  		layout-align="center center"
+  		flex="100" flex-xs="100" >	
+  	  	<p flex="100" flex-xs="100" layout="row" layout-align="center center" ng-show="pc.searchResult.totalElements <= 0">
+  	  		{{ 'CRUDS.PROJECTS.MESSAGES.NO_PROJECTS' | translate}}
+  	  	</p>  	  	
+  		<div  flex="100" flex-xs="100" layout="row" layout-wrap layout-margin layout-align="center center" ng-show="pc.searchResult.totalElements <= 0">
 	  		<md-button class="md-grid-item-content" ng-click="pc.createNew($event)">
 	          <md-icon md-font-icon="fa fa-magic"></md-icon>
 	          <div class="md-grid-text" >{{ 'CRUDS.PROJECTS.MESSAGES.NEW_PROJECT' | translate}}</div>

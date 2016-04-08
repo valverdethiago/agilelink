@@ -13,6 +13,7 @@
             offset : 0
     	},
     	isUndefinedOrNull : isUndefinedOrNull, 
+    	isNotNull : isNotNull,
     	adjustSearchResultForGrid : adjustSearchResultForGrid,
     	showMessage : showMessage
     	
@@ -60,8 +61,12 @@
     	});
     };
     
+    function isNotNull(val) {
+	    return !(val === null); 
+	}
+    
     function isUndefinedOrNull(val) {
-	    return angular.isUndefined(val) || val === null 
+	    return angular.isUndefined(val) || val === null; 
 	}
     
     function showMessage($mdToast, message) {

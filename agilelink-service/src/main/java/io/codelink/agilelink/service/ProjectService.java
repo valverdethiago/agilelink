@@ -54,5 +54,13 @@ public class ProjectService {
 	protected MongoTemplate getMongoTemplate() {
 		return mongoTemplate;
 	}
+
+	public Project activate(Project project) {
+		if(project == null || project.getArchivationDate() == null) {
+			return project;
+		}
+		project.setArchivationDate(null);
+		return this.save(project);
+	}
 	
 }

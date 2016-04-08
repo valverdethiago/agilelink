@@ -39,6 +39,12 @@ public class ProjectController {
 		return service.archive(project);
 	}
 
+	@RequestMapping(value = "/activate", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Project activate(@RequestBody Project project) {
+		return service.activate(project);
+	}
+
 	@RequestMapping(value = "/find", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<Project> find(@RequestBody ProjectSearchTo pageable) {
