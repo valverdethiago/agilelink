@@ -1,12 +1,2 @@
-bower_components
-dist
-node_modules
-target
-.settings
-.classpath
-.project
-.tmp
-/agilelink-view/
-/agilelink-service/
-/agilelink-web/
-/agilelink-model/
+/.project
+/.settings
