@@ -1,4 +1,4 @@
-package io.codelink.agilelink.web.util;
+package io.codelink.agilelink.util;
 
 import java.io.Serializable;
 

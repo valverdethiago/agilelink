@@ -1,4 +1,4 @@
-package io.codelink.agilelink.web;
+package io.codelink.agilelink.web.controllers;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.codelink.agilelink.model.Project;
 import io.codelink.agilelink.service.ProjectService;
-import io.codelink.agilelink.web.util.CustomPageRequest;
+import io.codelink.agilelink.to.ProjectSearchTo;
 
 @RestController
 @RequestMapping("/project")
@@ -24,19 +24,25 @@ public class ProjectController {
 
 	@RequestMapping(value = "/load/{id}", method = GET)
 	public Project loadProject(@PathVariable("id") String id) {
-		return service.loadProject(id);
+		return service.load(id);
 	}
 
 	@RequestMapping(value = "/save", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Project save(@RequestBody Project project) {
-		return service.saveProject(project);
+		return service.save(project);
+	}
+
+	@RequestMapping(value = "/archive", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Project archive(@RequestBody Project project) {
+		return service.archive(project);
 	}
 
 	@RequestMapping(value = "/find", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Page<Project> find(@RequestBody CustomPageRequest pageable) {
-		Page<Project> page = service.listProjects(pageable);
+	public Page<Project> find(@RequestBody ProjectSearchTo pageable) {
+		Page<Project> page = service.list(pageable);
 		return page;
 	}
 

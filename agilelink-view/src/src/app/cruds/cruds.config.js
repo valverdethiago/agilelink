@@ -12,6 +12,7 @@
             pageSize : 6,
             offset : 0
     	},
+    	isUndefinedOrNull : isUndefinedOrNull, 
     	adjustSearchResultForGrid : adjustSearchResultForGrid,
     	showMessage : showMessage
     	
@@ -58,6 +59,10 @@
     		array.push(value);
     	});
     };
+    
+    function isUndefinedOrNull(val) {
+	    return angular.isUndefined(val) || val === null 
+	}
     
     function showMessage($mdToast, message) {
     	$mdToast.show(
