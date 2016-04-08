@@ -2,8 +2,8 @@
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>
-        	<span translate ng-show="angular.isUndefined(controller.entity.id)">CRUDS.PROJECTS.DIALOG.TITLE.INSERT {{angular.isUndefined(controller.entity.id)}}</span>
-        	<span translate ng-show="!angular.isUndefined(controller.entity.id)">CRUDS.PROJECTS.DIALOG.TITLE.UPDATE {{angular.isUndefined(controller.entity.id)}}</span>
+        	<span ng-show="util.isUndefinedOrNull(controller.entity.id)"> {{ 'CRUDS.PROJECTS.DIALOG.TITLE.INSERT' | translate }} </span>
+        	<span ng-show="!util.isUndefinedOrNull(controller.entity.id)"> {{ 'CRUDS.PROJECTS.DIALOG.TITLE.UPDATE' | translate }} </span>
         </h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="controller.closeDialog()">
@@ -45,6 +45,7 @@
 		</div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
+    	<md-button class="md-accent" ng-click="controller.confirmArchivation($event, controller.entity)" ng-if="!util.isUndefinedOrNull(controller.entity.id)">{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.ARCHIVE' | translate }}</md-button>
 		<md-button class="md-accent" ng-click="controller.save(controller.entity)" ng-disabled="projectForm.$invalid" >{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.SAVE' | translate }}</md-button>
 		<md-button class="md-primary" ng-click="controller.closeDialog()" >{{ 'CRUDS.PROJECTS.LABELS.BUTTONS.CANCEL' | translate }}</md-button>
     </md-dialog-actions>

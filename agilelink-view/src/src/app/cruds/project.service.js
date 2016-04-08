@@ -10,6 +10,7 @@
     function ProjectService($http) {
     	var urlBase = '/rest/project' ;
         var service = {
+        	archive: archive,
             save: save,
             load: load,
             remove: remove,
@@ -20,6 +21,10 @@
         
         function save(project) {
         	return $http.post(urlBase+'/save', project);
+        };
+        
+        function archive(project) {
+        	return $http.post(urlBase+'/archive', project);
         };
 
         function load (id) {

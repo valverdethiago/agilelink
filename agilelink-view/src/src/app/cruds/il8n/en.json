@@ -4,26 +4,40 @@
 			"DIALOG" : {
 				"TITLE" : {
 					"INSERT" : "New Project",
-					"UPDATE" : "Edit Project"
+					"UPDATE" : "Edit Project",
+					"CONFIRMATION" : "Confirmation"
 				}
 			},
-			"LABELS" : { 
+			"LABELS" : {
 				"FIELDS" : {
 					"TITLE" : "Title",
 					"SUMMARY" : "Sumary",
 					"DESCRIPTION" : "Description"
 				},
 				"BUTTONS" : {
+					"ARCHIVE" : "Archive",
 					"CANCEL" : "Cancel",
 					"EDIT" : "Edit", 
 					"NEW" : "New",
+					"OK" : "Ok", 
 					"OPEN" : "Open", 
+					"REACTIVATE" : "Reactivate", 
 					"SAVE" : "Save"
 				}					
 			},
 			"MESSAGES" : {
 				"NO_PROJECTS" : "Feels empty? Click the button bellow to create a new project",
 				"NEW_PROJECT" : "Create New Project",
+				"NOT_IMPLEMENTED" : "Not Implemented Yet", 
+				"ERROR" : "An error has occurred. Try again later.", 
+				"SUCCESS" : {
+					"SAVE" : "Project saved successfully.",
+					"ARCHIVE" : "Project archived successfully."
+				},
+				"CONFIRMATION" : {
+					"ARCHIVE" : "Would you like to archive the project?", 
+					"ARCHIVE_EXP" : "It can be reactivated later."
+				},
 				"VALIDATION" : {
 					"TITLE" : "Please inform a valid title for the project",
 					"SUMMARY" : "Please inform a valid summary for the project",

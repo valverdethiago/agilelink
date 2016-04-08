@@ -7,9 +7,10 @@
         
 
     /* @ngInject */
-    function ProjectController($scope, $mdDialog, $mdMedia, $mdToast, projectService, util) {
+    function ProjectController($scope, $mdDialog, $mdMedia, $mdToast, $translate, projectService, util) {
         var projectController = this;
         angular.copy(util.defaultPageRequest, projectController.pageRequest = {});
+        projectController.pageRequest.onlyActives = true;
         
         projectController.find = find;
         projectController.onPageChange = onPageChange;
@@ -19,6 +20,8 @@
         projectController.save = save;
         projectController.closeDialog = closeDialog;
         projectController.openDialog = openDialog;
+        projectController.archive = archive;
+        projectController.confirmArchivation = confirmArchivation;
         
         function find() {        
             projectService.find(projectController.pageRequest)
@@ -50,22 +53,48 @@
         }
         
         function open(event, entity) {
-        	util.showMessage($mdToast, 'Not yet implemented.');
+        	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.NOT_IMPLEMENTED'));
         }
         
         function save(entity) {        
             projectService.save(entity)
         	.success(function(result) {
-            	util.showMessage($mdToast, 'Project '+entity.title+' saved successfully.');
+            	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.SUCCESS.SAVE'));
             	closeDialog();
                 find();   
         	})
         	.error(function (error) {
-            	util.showMessage($mdToast, 'An error has occurred. Try again later. ');
+            	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.ERROR'));
         	});        	
         };
         
-        function openDialog(event, title) {
+        function confirmArchivation(event, entity) {
+            var confirm = $mdDialog.confirm()
+                  .title($translate.instant('CRUDS.PROJECTS.MESSAGES.CONFIRMATION.ARCHIVE'))
+                  .textContent($translate.instant('CRUDS.PROJECTS.MESSAGES.CONFIRMATION.ARCHIVE_EXP'))
+                  .ariaLabel($translate.instant('CRUDS.PROJECTS.DIALOG.TITLE.CONFIRMATION'))
+                  .targetEvent(event)
+                  .ok($translate.instant('CRUDS.PROJECTS.LABELS.BUTTONS.OK'))
+                  .cancel($translate.instant('CRUDS.PROJECTS.LABELS.BUTTONS.CANCEL'));
+            $mdDialog.show(confirm).then(function() {
+            	projectController.archive(entity);
+            }, function() {
+            	detail(event, entity);
+            });
+        }
+        
+        function archive(entity) {        
+            projectService.archive(entity)
+        	.success(function(result) {
+            	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.SUCCESS.ARCHIVE'));
+                projectController.find();   
+        	})
+        	.error(function (error) {
+            	util.showMessage($mdToast, $translate.instant('CRUDS.PROJECTS.MESSAGES.ERROR') );
+        	});        	
+        };
+        
+        function openDialog(event) {
             $mdDialog.show({ 
                 controller: DialogController,
                 templateUrl: 'app/cruds/project_detail.html',
@@ -75,7 +104,7 @@
                 fullscreen: ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen,
                 locals: {
                 	projectController : projectController,
-                	title : title
+                	util : util
                 }
               });        	
         }
@@ -88,8 +117,10 @@
             projectController.find();            
         })();
         
-        function DialogController($scope, projectController) {
+        function DialogController($scope, projectController, util) {
             $scope.controller = projectController;  
+            $scope.util = util;
+            
         };
         
     }

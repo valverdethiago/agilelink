@@ -43,12 +43,14 @@
 		    </dir-pagination-controls>
 		</div>
 	</md-content>
-  	<md-content class="md-padding" layout-xs="column" layout="row" ng-show="pc.searchResult.totalElements <= 0">	
-  		<p >{{ 'CRUDS.PROJECTS.MESSAGES.NO_PROJECTS' | translate}}</p>  		
-  		<md-button class="md-grid-item-content" ng-click="pc.createNew($event)">
-          <md-icon md-font-icon="fa fa-magic"></md-icon>
-          <div class="md-grid-text" >{{ 'CRUDS.PROJECTS.MESSAGES.NEW_PROJECT' | translate}}</div>
-        </md-button>
+  	<md-content class="md-padding" ng-show="pc.searchResult.totalElements <= 0">	
+  	  	<p flex="100" flex-xs="100" layout-align="center center">{{ 'CRUDS.PROJECTS.MESSAGES.NO_PROJECTS' | translate}}</p>  	  	
+  		<div  flex="100" flex-xs="100" layout="row" layout-wrap layout-margin layout-align="center center">
+	  		<md-button class="md-grid-item-content" ng-click="pc.createNew($event)">
+	          <md-icon md-font-icon="fa fa-magic"></md-icon>
+	          <div class="md-grid-text" >{{ 'CRUDS.PROJECTS.MESSAGES.NEW_PROJECT' | translate}}</div>
+	        </md-button>
+       	</div>
   	</md-content>
     
 </div> 
