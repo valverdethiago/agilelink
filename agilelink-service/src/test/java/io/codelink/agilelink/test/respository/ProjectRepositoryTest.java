@@ -4,9 +4,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -30,8 +27,6 @@ public class ProjectRepositoryTest {
 		to.setPageSize(2);
 		to.setPageNumber(1);
 		to.setSearchTerm("Desc");
-		Order order = new Order(Direction.ASC, "title");
-		to.setSort(new Sort(new Order(Direction.ASC, "title")));
 		Page<Project> page = this.projectRepository.search(to.getSearchTerm(), to.isOnlyActives(), to);
 		System.out.println(page.getTotalElements()+" encontrados");
 		System.out.println(page.getTotalPages()+" páginas");
