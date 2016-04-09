@@ -29,10 +29,19 @@ public class ProjectService {
 	}
 	
 	public Page<Project> list(ProjectSearchTo searchTo) {
-		if(searchTo.isOnlyActives()) {
-			return this.getRepository().findAllActive(searchTo);
-		}
-		return this.getRepository().findAll(searchTo);
+//		Query query = this.buildQuery(searchTo);
+//		return this.getMongoTemplate().find(query, Project.class);
+//		if(searchTo.isOnlyActives()) {
+//			if(StringUtils.isEmpty(searchTo.getSearchTerm())) {
+//				return this.getRepository().searchAllActive(searchTo);
+//			}
+//			return this.getRepository().searchAllActive(searchTo.getSearchTerm(), searchTo);
+//		}
+//		if(StringUtils.isEmpty(searchTo.getSearchTerm())) {
+//			return this.getRepository().searchAll(searchTo);
+//		}
+//		return this.getRepository().searchAll(searchTo.getSearchTerm(), searchTo);
+		return null;
 	}
 
 	public Iterable<Project> listAll() {
