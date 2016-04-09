@@ -1,7 +1,7 @@
 <div ng-controller="ProjectController as pc" ng-cloak ng-init="pc.init()">  		
   	<md-content class="md-padding" layout-xs="column" layout="row" >
 			<form name="searchForm" novalidate flex="100" layout="row" layout-align="center center" >
-	  			<div flex="10" flex-xs="100" layout="column" ng-show="pc.searchResult.totalElements > 0">
+	  			<div flex="10" flex-xs="100" layout="column" >
 				    <md-button 
 				    	ng-click="pc.createNew($event)" 
 				    	class="md-fab md-accent md-fab-top-left" 
