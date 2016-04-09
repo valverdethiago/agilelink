@@ -4,6 +4,9 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
@@ -28,20 +31,18 @@ public class ProjectService {
 		return this.getRepository().save(project);
 	}
 	
-	public Page<Project> list(ProjectSearchTo searchTo) {
-//		Query query = this.buildQuery(searchTo);
-//		return this.getMongoTemplate().find(query, Project.class);
-//		if(searchTo.isOnlyActives()) {
-//			if(StringUtils.isEmpty(searchTo.getSearchTerm())) {
-//				return this.getRepository().searchAllActive(searchTo);
-//			}
-//			return this.getRepository().searchAllActive(searchTo.getSearchTerm(), searchTo);
-//		}
-//		if(StringUtils.isEmpty(searchTo.getSearchTerm())) {
-//			return this.getRepository().searchAll(searchTo);
-//		}
-//		return this.getRepository().searchAll(searchTo.getSearchTerm(), searchTo);
-		return null;
+	public Page<Project> search(ProjectSearchTo searchTo) {
+		if(searchTo == null) {
+			return null;
+		}		
+		if(searchTo.getSearchTerm() == null) {
+			// TODO [valverde.thiago] Retirar essa camanga daqui. Query da pau com termos nulos
+			searchTo.setSearchTerm("");
+		}
+		if(searchTo.getSort() == null) {
+			searchTo.setSort(new Sort(new Order(Direction.ASC, "title")));
+		}
+		return this.getRepository().search(searchTo.getSearchTerm(), searchTo.isOnlyActives(), searchTo);
 	}
 
 	public Iterable<Project> listAll() {
@@ -55,14 +56,6 @@ public class ProjectService {
 		project.setArchivationDate(new Date());
 		return this.save(project);
 	}
-	
-	protected ProjectRepository getRepository() {
-		return repository;
-	}
-
-	protected MongoTemplate getMongoTemplate() {
-		return mongoTemplate;
-	}
 
 	public Project activate(Project project) {
 		if(project == null || project.getArchivationDate() == null) {
@@ -70,6 +63,14 @@ public class ProjectService {
 		}
 		project.setArchivationDate(null);
 		return this.save(project);
+	}
+	
+	protected ProjectRepository getRepository() {
+		return repository;
+	}
+
+	protected MongoTemplate getMongoTemplate() {
+		return mongoTemplate;
 	}
 	
 }

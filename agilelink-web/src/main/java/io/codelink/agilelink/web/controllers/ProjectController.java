@@ -48,7 +48,7 @@ public class ProjectController {
 	@RequestMapping(value = "/find", method = POST, consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Page<Project> find(@RequestBody ProjectSearchTo pageable) {
-		Page<Project> page = service.list(pageable);
+		Page<Project> page = service.search(pageable);
 		return page;
 	}
 

@@ -1,7 +1,6 @@
 <div ng-controller="ProjectController as pc" ng-cloak ng-init="pc.init()">  		
   	<md-content class="md-padding" layout-xs="column" layout="row" >
 			<form name="searchForm" novalidate flex="100" layout="row" layout-align="center center" >
-<<<<<<< .mine
 	  			<div flex="10" flex-xs="100" layout="column" >
 				    <md-button 
 				    	ng-click="pc.createNew($event)" 
@@ -12,18 +11,6 @@
 					</md-button>
 				</div>
 	    		<md-input-container  class="md-block" flex="60">
-=======
-	  			<div flex="10" flex-xs="100" layout="column" ng-show="pc.searchResult.totalElements > 0">
-				    <md-button 
-				    	ng-click="pc.createNew($event)" 
-				    	class="md-fab md-accent md-fab-top-left" 
-				    	aria-label="New">
-				    	<md-icon md-font-icon="zmdi zmdi-plus"></md-icon>
-				    	<md-tooltip>New</md-tooltip>
-					</md-button>
-				</div>
-	    		<md-input-container  class="md-block" flex="60">
->>>>>>> .theirs
 			    	<label translate>CRUDS.PROJECTS.LABELS.FIELDS.SEARCH</label>
 			    	<input ng-minlength="3" name="searchTerm" 
 			    		ng-model="pc.pageRequest.searchTerm" 
